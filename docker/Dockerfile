@@ -5,7 +5,7 @@ RUN apk add --no-cache git \
         && mvn clean install 
 
 FROM java:8
-MAINTAINER niuyu107@163.com
+ENV LOGIN_MESSAGE="Default credentials: admin\/manager"
 WORKDIR /var/app
 
 COPY --from=0 /usr/src/zkui/target/zkui-2.0-SNAPSHOT-jar-with-dependencies.jar ./zkui.jar
@@ -14,3 +14,6 @@ COPY --from=0 /usr/src/zkui/docker/bootstrap.sh .
 EXPOSE 9090 
 
 ENTRYPOINT ["/var/app/bootstrap.sh"]
+
+HEALTHCHECK --interval=30s --timeout=5s \
+CMD curl -f http://localhost:9090/ || exit 1
