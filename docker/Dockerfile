@@ -8,7 +8,7 @@ FROM java:8
 MAINTAINER niuyu107@163.com
 WORKDIR /var/app
 
-COPY --from=0 /usr/src/zkui/target/zkui-*.jar ./zkui.jar 
+COPY --from=0 /usr/src/zkui/target/zkui-2.0-SNAPSHOT-jar-with-dependencies.jar ./zkui.jar
 COPY --from=0 /usr/src/zkui/config.cfg . 
 COPY --from=0 /usr/src/zkui/docker/bootstrap.sh . 
 EXPOSE 9090 
